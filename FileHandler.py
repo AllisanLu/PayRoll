@@ -1,6 +1,11 @@
 from Employee import *
 from tkinter import *
 
+import xlrd
+from openpyxl import load_workbook
+from openpyxl import Workbook
+from openpyxl import utils
+
 
 class FileHandler:
 
@@ -20,6 +25,11 @@ class FileHandler:
                                       fname=info[1],
                                       salary=info[2],
                                       file=info[3])
+                    try:
+                        FileHandler.load_attendence(app, newbie)
+                    except FileNotFoundError:
+                        print("No attendance file")
+
                     app.new_person(employ_nam, newbie)
                     app.employee_counter += 1
         except FileNotFoundError:
@@ -41,15 +51,57 @@ class FileHandler:
                        app.displayed_employees[-1].get_attendence_file())
 
     @staticmethod
-    def load_attendence(app, loc):
-        rtn = ""
+    def load_attendence(app, employee):
+        loc = "./" + employee.get_filename() + "/attendance"
+        rtn = []
         try:
-            with open(loc, 'r') as file:
-                for line in file:
-                    rtn += line.strip() + " "
+            for i in range(3):
+                workbook = xlrd.open_workbook(loc)
+                sheet = workbook.sheet_by_index(0)
+                rtn.append(sheet.cell_value(i, 1))
+
+            employee.set_hours(rtn[0])
+            employee.set_bonus(rtn[1])
+            employee.set_deduction(rtn[2])
         except FileNotFoundError:
             print("No file found for: attendance")
 
-        return rtn
+    @staticmethod
+    def edit_attendence(employee, hours, bonus, deduction):
+        loc = "./" + employee.get_filename() + "/attendance"
+        employee.set_hours(hours.get("1.0", "end").strip())
+        employee.set_bonus(bonus.get("1.0", "end").strip())
+        employee.set_deduction(deduction.get("1.0", "end").strip())
+
+        try:
+            wb = load_workbook(loc)
+            ws = wb["Sheet1"]
+            input_hrs = ws.cell(1, 2)
+            input_bonus = ws.cell(2, 2)
+            input_deduction = ws.cell(3, 2)
+
+            input_hrs.value = hours.get("1.0", "end").strip()
+            input_bonus.value = bonus.get("1.0", "end").strip()
+            input_deduction.value = deduction.get("1.0", "end").strip()
+
+            wb.save(loc)
+            wb.close()
+        except utils.exceptions.InvalidFileException:
+            wb = Workbook()
+            wb.create_sheet("Sheet1")
+            ws = wb["Sheet1"]
+            input_hrs = ws.cell(1, 2)
+            input_bonus = ws.cell(2, 2)
+            input_deduction = ws.cell(3, 2)
+
+            input_hrs.value = hours.get("1.0", "end").strip()
+            input_bonus.value = bonus.get("1.0", "end").strip()
+            input_deduction.value = deduction.get("1.0", "end").strip()
+
+            wb.save(loc)
+            wb.close()
+
+
+
 
 

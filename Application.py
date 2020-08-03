@@ -83,9 +83,11 @@ class Application:
         print("delete employees is not ready for use yet")
 
     def edit_employee(self, employee):
+        #TODO: when editing employee be able to edit hours, when click ok save those hours into an excel that filehaldler can use
         edit_employee_popup = Toplevel(self.root)
         edit_employee_popup.wm_title("Edit Employee")
-        edit_employee_popup.geometry("200x200")
+        edit_employee_popup.geometry("250x310")
+        edit_employee_popup.grab_set()
 
         name_prompt = Label(edit_employee_popup, text="Name: ").pack()
         name_entry = Text(edit_employee_popup, height=1, width=20)
@@ -97,33 +99,50 @@ class Application:
         salary_entry.insert(INSERT, employee.get_salary())
         salary_entry.pack()
 
+        hours_prompt = Label(edit_employee_popup, text="Hours worked: ").pack()
+        hours_entry = Text(edit_employee_popup, height=1, width=20)
+        hours_entry.insert(INSERT, employee.get_hours())
+        hours_entry.pack()
+
+        bonus_prompt = Label(edit_employee_popup, text="Bonus: ").pack()
+        bonus_entry = Text(edit_employee_popup, height=1, width=20)
+        bonus_entry.insert(INSERT, employee.get_bonus())
+        bonus_entry.pack()
+
+        deduction_prompt = Label(edit_employee_popup, text="Deduction: ").pack()
+        deduction_entry = Text(edit_employee_popup, height=1, width=20)
+        deduction_entry.insert(INSERT, employee.get_deduction())
+        deduction_entry.pack()
+
         filename = StringVar()
         filename.set("File Opened: " + employee.get_attendence_file())
-        label_file_explorer = Label(edit_employee_popup, textvariable=filename, wraplength=120)
+        label_file_explorer = Label(edit_employee_popup, textvariable=filename, wraplength=150)
         label_file_explorer.pack()
 
         okay = Button(edit_employee_popup, text="OK",
-                      command=lambda: self.get_info(name_entry, salary_entry,
-                                                           edit_employee_popup, employee))
+                      command=lambda: self.get_info(name_entry, salary_entry, hours_entry, bonus_entry,
+                                                    deduction_entry, edit_employee_popup, employee))
         okay.pack(side=BOTTOM)
 
         upload = Button(edit_employee_popup, text="upload attendance sheet",
                         command=lambda: self.upload(employee, filename))
         upload.pack(side=BOTTOM)
 
-    def get_info(self, name_entry, salary_entry, popup, employee):
+    def get_info(self, name_entry, salary_entry, hour_entry, bonus_entry, deduction_entry, popup, employee):
         employee.set_name(name_entry.get("1.0", "end").strip())
         employee.set_salary(salary_entry.get("1.0", "end").strip())
+        FileHandler.edit_attendence(employee, hour_entry, bonus_entry, deduction_entry)
         self.update()
+        popup.grab_release()
         popup.destroy()
 
-#TODO: edit for excel sheets and work out how employee sheets work
     def upload(self, employee, filename):
         #print(os.getcwd())
         file = filedialog.askopenfilename(initialdir="/", title="Select a File",
-                                                  filetypes=(("Text File", "*.txt*"), ("all files", "*.*")))
+                                                  filetypes=(("Excel File", "*.xlsx*"), ("all files", "*.*")))
         filename.set("File Uploaded: " + file)
         employee.set_attendence_file(file)
+        #.xlsx
 
         #copy the file
         location = "./" + employee.get_filename() + "/attendance"
@@ -131,19 +150,14 @@ class Application:
         print("File saved at: " + location)
 
         FileHandler.save(self)
+        #TODO: EDIT THIS TO LIKE change the input values when file is uploaded
 
     def send_reports(self):
         display = StringVar()
         for employee in self.displayed_employees:
             try:
-                hours = FileHandler.load_attendence(app=self, loc="./" + employee.get_filename() + "/attendance")
-                seperated = hours.split(" ")
-
-                noombers = []
-                for string in seperated:
-                    if self.isfloat(string.strip()):
-                        noombers.append(float(string.strip()))
-                amount_paid = (float(employee.get_salary()) * noombers[0]) + noombers[1] - noombers[2]
+                FileHandler.load_attendence(app=self, employee=employee)
+                amount_paid = (float(employee.get_salary()) * employee.get_hours()) + employee.get_bonus() - employee.get_deduction()
                 display.set(display.get() + "\n" + employee.get_name() + " is paid: " + str(amount_paid))
             except IndexError:
                 print(employee.get_name() + " does not have an attendance file")
@@ -166,14 +180,6 @@ class Application:
         person = Button(self.root, textvariable=name, justify=CENTER,
                         command=lambda: self.edit_employee(employee))
         person.pack(side=LEFT)
-
-    @staticmethod
-    def isfloat(value):
-        try:
-            float(value)
-            return True
-        except ValueError:
-            return False
 
 
 if __name__ == '__main__':
