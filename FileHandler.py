@@ -53,7 +53,7 @@ class FileHandler:
     @staticmethod
     def load_attendence(app, employee):
         loc = "./" + employee.get_filename() + "/attendance.xlsx"
-        print("Opening: " + loc)
+        #print("Opening: " + loc)
         rtn = []
         try:
             for i in range(3):
@@ -88,11 +88,11 @@ class FileHandler:
 
             wb.save(loc)
             wb.close()
-        except utils.exceptions.InvalidFileException:
+        except FileNotFoundError:
             print("option 2")
             wb = Workbook() #TODO: fix this option 2 nooooo :C
-            wb.create_sheet("Sheet1")
-            ws = wb["Sheet1"]
+            ws = wb.active
+            ws.title = "Sheet1"
             input_hrs = ws.cell(1, 2)
             input_bonus = ws.cell(2, 2)
             input_deduction = ws.cell(3, 2)
