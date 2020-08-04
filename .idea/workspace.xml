@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f7ef611-da35-43f3-af36-3e922bd26041" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Employee.py" beforeDir="false" afterPath="$PROJECT_DIR$/Employee.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FileHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/FileHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/save.txt" beforeDir="false" />
     </list>
@@ -31,25 +29,29 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="258">
+              <caret line="172" column="80" selection-start-line="172" selection-start-column="80" selection-end-line="172" selection-end-column="80" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
-                <element signature="e#5705#5875#0" />
-                <element signature="e#5927#6181#0" />
+                <element signature="e#197#472#0" />
+                <element signature="e#504#1245#0" />
+                <element signature="e#1314#1784#0" />
+                <element signature="e#1849#2427#0" />
+                <element signature="e#2468#2518#0" />
+                <element signature="e#7035#7205#0" />
+                <element signature="e#7257#7511#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="73" column="46" lean-forward="true" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
+            <state relative-caret-position="225">
+              <caret line="92" column="62" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -83,14 +85,14 @@
         <option value="$PROJECT_DIR$/ButtonUtils.py" />
         <option value="$PROJECT_DIR$/HR.py" />
         <option value="$PROJECT_DIR$/Employee.py" />
-        <option value="$PROJECT_DIR$/Application.py" />
         <option value="$PROJECT_DIR$/FileHandler.py" />
+        <option value="$PROJECT_DIR$/Application.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="220" />
-    <option name="y" value="31" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="219" />
+    <option name="y" value="30" />
     <option name="width" value="1515" />
     <option name="height" value="975" />
   </component>
@@ -100,6 +102,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -111,7 +114,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,15 +196,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="147" y="21" width="1010" height="650" extended-state="0" />
+    <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17761807" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13899921" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32755297" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2504817" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32615894" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2665563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2781457" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -219,9 +221,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test.txt" />
     <entry file="file://$PROJECT_DIR$/ButtonUtils.py" />
-    <entry file="file://$PROJECT_DIR$/HR.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Employee.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -229,24 +228,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application.py">
+    <entry file="file://$PROJECT_DIR$/HR.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+        <state relative-caret-position="225">
+          <caret line="92" column="62" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#5705#5875#0" />
-            <element signature="e#5927#6181#0" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileHandler.py">
+    <entry file="file://$PROJECT_DIR$/Application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="73" column="46" lean-forward="true" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
+        <state relative-caret-position="258">
+          <caret line="172" column="80" selection-start-line="172" selection-start-column="80" selection-end-line="172" selection-end-column="80" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#197#472#0" />
+            <element signature="e#504#1245#0" />
+            <element signature="e#1314#1784#0" />
+            <element signature="e#1849#2427#0" />
+            <element signature="e#2468#2518#0" />
+            <element signature="e#7035#7205#0" />
+            <element signature="e#7257#7511#0" />
           </folding>
         </state>
       </provider>

@@ -125,39 +125,52 @@ class Application:
         okay.pack(side=BOTTOM)
 
         upload = Button(edit_employee_popup, text="upload attendance sheet",
-                        command=lambda: self.upload(employee, filename))
+                        command=lambda: self.upload(employee, filename, hours_entry,
+                                                    bonus_entry, deduction_entry))
         upload.pack(side=BOTTOM)
 
     def get_info(self, name_entry, salary_entry, hour_entry, bonus_entry, deduction_entry, popup, employee):
         employee.set_name(name_entry.get("1.0", "end").strip())
         employee.set_salary(salary_entry.get("1.0", "end").strip())
-        FileHandler.edit_attendence(employee, hour_entry, bonus_entry, deduction_entry)
+        loc = FileHandler.edit_attendence(employee, hour_entry, bonus_entry, deduction_entry)
+        employee.set_attendence_file(loc)
+        print("File saved at: " + loc)
         self.update()
         popup.grab_release()
         popup.destroy()
 
-    def upload(self, employee, filename):
+    def upload(self, employee, filename, hour_entry, bonus_entry, deduction_entry):
         #print(os.getcwd())
         file = filedialog.askopenfilename(initialdir="/", title="Select a File",
                                                   filetypes=(("Excel File", "*.xlsx*"), ("all files", "*.*")))
         filename.set("File Uploaded: " + file)
         employee.set_attendence_file(file)
-        #.xlsx
 
         #copy the file
-        location = "./" + employee.get_filename() + "/attendance"
+        location = "./" + employee.get_filename() + "/attendance.xlsx"
         shutil.copy2(file, location)
         print("File saved at: " + location)
 
         FileHandler.save(self)
+        FileHandler.load_attendence(self, employee)
+
+        hour_entry.delete('1.0', END)
+        bonus_entry.delete('1.0', END)
+        deduction_entry.delete('1.0', END)
+
+        hour_entry.insert(INSERT, employee.get_hours())
+        bonus_entry.insert(INSERT, employee.get_bonus())
+        deduction_entry.insert(INSERT, employee.get_deduction())
         #TODO: EDIT THIS TO LIKE change the input values when file is uploaded
+
 
     def send_reports(self):
         display = StringVar()
         for employee in self.displayed_employees:
             try:
                 FileHandler.load_attendence(app=self, employee=employee)
-                amount_paid = (float(employee.get_salary()) * employee.get_hours()) + employee.get_bonus() - employee.get_deduction()
+                amount_paid = (float(employee.get_salary()) * float(employee.get_hours())) + \
+                              float(employee.get_bonus()) - float(employee.get_deduction())
                 display.set(display.get() + "\n" + employee.get_name() + " is paid: " + str(amount_paid))
             except IndexError:
                 print(employee.get_name() + " does not have an attendance file")

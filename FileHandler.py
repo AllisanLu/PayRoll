@@ -11,7 +11,7 @@ class FileHandler:
 
     @staticmethod
     def load_employees(app, file_loc):
-        print("Loading " + file_loc)
+        #print("Loading " + file_loc)
         # load the employees on file
         try:
             with open(file_loc, 'r') as previous_file:  # opens and closes file for you
@@ -37,7 +37,7 @@ class FileHandler:
 
     @staticmethod # think of a way to do this and like be able to save just at the end
     def save(app):
-        print("Saving...")
+        #print("Saving...")
         with open("./save.txt", 'w') as file:
             for i in range(len(app.displayed_employees) - 1):
                 file.write(app.displayed_employees[i].get_name() + " " +
@@ -52,7 +52,8 @@ class FileHandler:
 
     @staticmethod
     def load_attendence(app, employee):
-        loc = "./" + employee.get_filename() + "/attendance"
+        loc = "./" + employee.get_filename() + "/attendance.xlsx"
+        print("Opening: " + loc)
         rtn = []
         try:
             for i in range(3):
@@ -68,13 +69,14 @@ class FileHandler:
 
     @staticmethod
     def edit_attendence(employee, hours, bonus, deduction):
-        loc = "./" + employee.get_filename() + "/attendance"
+        loc = "./" + employee.get_filename() + "/attendance.xlsx"
         employee.set_hours(hours.get("1.0", "end").strip())
         employee.set_bonus(bonus.get("1.0", "end").strip())
         employee.set_deduction(deduction.get("1.0", "end").strip())
 
         try:
             wb = load_workbook(loc)
+            print("option 1")
             ws = wb["Sheet1"]
             input_hrs = ws.cell(1, 2)
             input_bonus = ws.cell(2, 2)
@@ -87,7 +89,8 @@ class FileHandler:
             wb.save(loc)
             wb.close()
         except utils.exceptions.InvalidFileException:
-            wb = Workbook()
+            print("option 2")
+            wb = Workbook() #TODO: fix this option 2 nooooo :C
             wb.create_sheet("Sheet1")
             ws = wb["Sheet1"]
             input_hrs = ws.cell(1, 2)
@@ -101,7 +104,5 @@ class FileHandler:
             wb.save(loc)
             wb.close()
 
-
-
-
+        return loc
 
