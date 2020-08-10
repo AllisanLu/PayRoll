@@ -45,6 +45,8 @@ class Application:
         self.root.mainloop()
 
 #literally all button commands
+    #TODO: what if 2 ppl r trying to edit O.o
+
     def add_employee(self):
         #menu shows up
         popup = Toplevel(self.root)
@@ -83,7 +85,6 @@ class Application:
         print("delete employees is not ready for use yet")
 
     def edit_employee(self, employee):
-        #TODO: when editing employee be able to edit hours, when click ok save those hours into an excel that filehaldler can use
         edit_employee_popup = Toplevel(self.root)
         edit_employee_popup.wm_title("Edit Employee")
         edit_employee_popup.geometry("250x310")
@@ -161,8 +162,6 @@ class Application:
         hour_entry.insert(INSERT, employee.get_hours())
         bonus_entry.insert(INSERT, employee.get_bonus())
         deduction_entry.insert(INSERT, employee.get_deduction())
-        #TODO: EDIT THIS TO LIKE change the input values when file is uploaded
-
 
     def send_reports(self):
         display = StringVar()

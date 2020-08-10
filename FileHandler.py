@@ -4,14 +4,13 @@ from tkinter import *
 import xlrd
 from openpyxl import load_workbook
 from openpyxl import Workbook
-from openpyxl import utils
 
 
 class FileHandler:
 
     @staticmethod
     def load_employees(app, file_loc):
-        #print("Loading " + file_loc)
+        print("Loading " + file_loc)
         # load the employees on file
         try:
             with open(file_loc, 'r') as previous_file:  # opens and closes file for you
@@ -37,7 +36,7 @@ class FileHandler:
 
     @staticmethod # think of a way to do this and like be able to save just at the end
     def save(app):
-        #print("Saving...")
+        print("Saving...")
         with open("./save.txt", 'w') as file:
             for i in range(len(app.displayed_employees) - 1):
                 file.write(app.displayed_employees[i].get_name() + " " +
@@ -53,7 +52,6 @@ class FileHandler:
     @staticmethod
     def load_attendence(app, employee):
         loc = "./" + employee.get_filename() + "/attendance.xlsx"
-        #print("Opening: " + loc)
         rtn = []
         try:
             for i in range(3):
@@ -76,7 +74,7 @@ class FileHandler:
 
         try:
             wb = load_workbook(loc)
-            print("option 1")
+            #print("option 1")
             ws = wb["Sheet1"]
             input_hrs = ws.cell(1, 2)
             input_bonus = ws.cell(2, 2)
@@ -89,8 +87,8 @@ class FileHandler:
             wb.save(loc)
             wb.close()
         except FileNotFoundError:
-            print("option 2")
-            wb = Workbook() #TODO: fix this option 2 nooooo :C
+            #print("option 2")
+            wb = Workbook()
             ws = wb.active
             ws.title = "Sheet1"
             input_hrs = ws.cell(1, 2)
