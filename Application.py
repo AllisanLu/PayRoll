@@ -46,6 +46,7 @@ class Application:
 
 #literally all button commands
     #TODO: what if 2 ppl r trying to edit O.o
+    #maybe check to see if the file is opened else where? --> if it is make a error?
 
     def add_employee(self):
         #menu shows up
